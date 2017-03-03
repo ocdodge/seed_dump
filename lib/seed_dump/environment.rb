@@ -20,6 +20,8 @@ class SeedDump
 
       append = (env['APPEND'] == 'true')
 
+      id_in_development = (env['ID_IN_DEV'] == 'true')
+
       models_exclude_env = env['MODELS_EXCLUDE']
       if models_exclude_env
         models_exclude_env.split(',')
@@ -35,8 +37,8 @@ class SeedDump
                       batch_size: (env['BATCH_SIZE'] ? env['BATCH_SIZE'].to_i : nil),
                       exclude: (env['EXCLUDE'] ? env['EXCLUDE'].split(',').map {|e| e.strip.to_sym} : nil),
                       file: (env['FILE'] || 'db/seeds.rb'),
-                      import: (env['IMPORT'] == 'true'))
-
+                      import: (env['IMPORT'] == 'true'),
+                      id_in_dev: id_in_development)
         append = true
       end
     end
